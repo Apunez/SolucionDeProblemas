@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>EVANZU S.A.C. · Evaluación de resultados de la solución</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Source+Sans+3:wght@400;600&display=swap">
+<style>
+:root{--bg:#F2F6F7;--surf:#fff;--ink:#12262B;--mut:#53676C;--line:#D5E0E2;--red:#C8412F;--redbg:#FBE9E5;--amb:#D99A00;--ambbg:#FFF4D6;--grn:#1E8A5A;--grnbg:#E1F4EB;--navy:#0E3B43;--navyink:#fff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0C1A1D;--surf:#14282C;--ink:#E6F0F1;--mut:#9DB3B7;--line:#27424777;--redbg:#3A1E1A;--ambbg:#3A2F10;--grnbg:#12342A;--navy:#06262C}}
+:root[data-theme="dark"]{--bg:#0C1A1D;--surf:#14282C;--ink:#E6F0F1;--mut:#9DB3B7;--line:#274247;--redbg:#3A1E1A;--ambbg:#3A2F10;--grnbg:#12342A;--navy:#06262C}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 "Source Sans 3",Segoe UI,Arial,sans-serif}
+h1,h2,h3{font-family:"Bricolage Grotesque",Segoe UI,Arial,sans-serif;line-height:1.15;margin:0}
+header{background:var(--navy);color:var(--navyink);padding:56px 24px 40px}
+.wrap{max-width:1040px;margin:0 auto}
+header h1{font-size:clamp(30px,5vw,52px);font-weight:800;max-width:760px}
+header p{max-width:640px;color:#BFD6DA;margin:14px 0 0}
+.semaforo{display:flex;gap:8px;margin-bottom:22px}
+.semaforo i{width:16px;height:16px;border-radius:50%;display:block;transition:transform .2s}
+.semaforo i:nth-child(1){background:var(--red)}.semaforo i:nth-child(2){background:var(--amb)}.semaforo i:nth-child(3){background:var(--grn)}
+.semaforo i:hover{transform:scale(1.6)}
+.team{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.team span{background:#ffffff1c;border-radius:20px;padding:3px 12px;font-size:14px;transition:background .2s}
+.team span:hover{background:#ffffff40}
+nav{position:sticky;top:0;z-index:20;background:var(--surf);border-bottom:1px solid var(--line);overflow-x:auto;white-space:nowrap;padding-top:env(safe-area-inset-top,0px)}
+nav .wrap{display:flex;gap:2px;padding:0 12px}
+nav a{padding:14px 14px;color:var(--mut);text-decoration:none;font-weight:600;font-size:15px;border-bottom:3px solid transparent;transition:.2s}
+nav a:hover,nav a.on{color:var(--ink);border-color:var(--amb)}
+section{padding:56px 24px 8px}
+section h2{font-size:clamp(26px,3.6vw,36px);margin-bottom:8px}
+.lead{color:var(--mut);max-width:680px;margin:0 0 26px}
+.note{background:var(--ambbg);border-left:4px solid var(--amb);padding:10px 14px;border-radius:6px;font-size:15px;margin:0 0 22px;max-width:760px}
+.tree{display:flex;flex-direction:column;align-items:center;gap:10px}
+.row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;width:100%}
+.node{flex:1 1 220px;max-width:320px;padding:14px 16px;border-radius:10px;border:2px solid transparent;cursor:pointer;transition:transform .2s,box-shadow .2s,background .2s;font-size:15.5px}
+.node small{display:block;font-weight:600;color:var(--mut);margin-bottom:2px;font-size:13px}
+.node:hover,.node:focus-visible{transform:translateY(-4px);box-shadow:0 8px 20px #0003;outline:none}
+.p .node.eff{background:var(--redbg);border-color:#C8412F55}.p .node.eff:hover{background:var(--red);color:#fff}
+.p .node.eff:hover small{color:#fff}
+.p .node.core{background:var(--red);color:#fff;max-width:640px;flex-basis:100%;font-weight:600}.p .node.core small{color:#fff}
+.p .node.cau{background:var(--surf);border-color:var(--red)}.p .node.cau:hover{background:var(--redbg)}
+.o .node.eff{background:var(--grnbg);border-color:#1E8A5A55}.o .node.eff:hover{background:var(--grn);color:#fff}.o .node.eff:hover small{color:#fff}
+.o .node.core{background:var(--grn);color:#fff;max-width:640px;flex-basis:100%;font-weight:600}.o .node.core small{color:#fff}
+.o .node.cau{background:var(--surf);border-color:var(--grn)}.o .node.cau:hover{background:var(--grnbg)}
+.arrow{font-size:22px;color:var(--mut);line-height:1}
+.tog{display:inline-flex;border:1px solid var(--line);border-radius:30px;overflow:hidden;margin-bottom:22px;background:var(--surf)}
+.tog button{border:0;background:none;padding:9px 20px;font:600 15px inherit;font-family:inherit;color:var(--mut);cursor:pointer;transition:.2s}
+.tog button:hover{background:var(--ambbg)}
+.tog button.on{background:var(--navy);color:#fff}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:12px;padding:22px;transition:border-color .2s,box-shadow .2s}
+.card:hover{border-color:var(--amb);box-shadow:0 6px 18px #0002}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.alt{border-top:6px solid var(--grn)}
+.alt h3{font-size:22px;margin-bottom:6px}
+.eje{display:block;width:100%;text-align:left;margin-top:10px;padding:12px 14px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit;cursor:pointer;transition:.2s}
+.eje:hover{background:var(--grn);color:#fff;border-color:var(--grn);transform:translateX(5px)}
+.bars .b{margin:18px 0}
+.bars .lab{display:flex;justify-content:space-between;font-weight:600;margin-bottom:6px}
+.track{height:34px;background:var(--line);border-radius:8px;overflow:hidden}
+.fill{height:100%;width:0;border-radius:8px;transition:width 1.1s cubic-bezier(.2,.8,.2,1);display:flex;align-items:center;justify-content:flex-end;padding-right:12px;color:#fff;font-weight:700}
+.crit{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:22px}
+.crit .card{padding:14px 16px;cursor:help}
+.crit b{font-size:24px;font-family:"Bricolage Grotesque",sans-serif}
+.acc{border:1px solid var(--line);border-radius:12px;background:var(--surf);margin-bottom:12px;overflow:hidden;transition:border-color .2s}
+.acc:hover{border-color:var(--amb)}
+.acc>button{width:100%;display:flex;gap:14px;align-items:center;text-align:left;padding:16px 18px;border:0;background:none;color:var(--ink);font:600 17px inherit;font-family:inherit;cursor:pointer}
+.acc>button:hover{background:var(--ambbg)}
+.acc .n{flex:none;width:34px;height:34px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-weight:700}
+.acc .chev{margin-left:auto;transition:transform .25s}
+.acc.open .chev{transform:rotate(180deg)}
+.acc .body{display:none;padding:4px 18px 18px 66px}
+.acc.open .body{display:block}
+.kv{margin:10px 0 0}.kv b{display:block;font-size:13.5px;color:var(--mut);font-weight:600}
+.calc{background:var(--grnbg);border-radius:12px;padding:18px;margin-top:22px;max-width:640px}
+.calc input{width:90px;padding:8px;border:1px solid var(--line);border-radius:6px;background:var(--surf);color:var(--ink);font:inherit}
+.calc .res{font:800 30px "Bricolage Grotesque",sans-serif;margin-top:8px}
+.chk{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.chk li{display:flex;gap:12px;align-items:center;padding:11px 14px;background:var(--surf);border:1px solid var(--line);border-radius:8px;cursor:pointer;transition:.2s}
+.chk li:hover{background:var(--grnbg);border-color:var(--grn)}
+.chk li.off{opacity:.5;border-style:dashed}
+.chk .box{width:24px;height:24px;border-radius:6px;background:var(--grn);color:#fff;display:grid;place-items:center;font-weight:700;flex:none}
+.chk li.off .box{background:var(--line);color:transparent}
+.score{font:800 34px "Bricolage Grotesque",sans-serif;margin:14px 0 0}
+.concl{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px}
+.flip{perspective:900px;min-height:270px;cursor:pointer;border:0;background:none;padding:0;font:inherit;color:inherit;text-align:left}
+.flip .in{position:relative;width:100%;height:100%;min-height:270px;transition:transform .6s;transform-style:preserve-3d}
+.flip.on .in{transform:rotateY(180deg)}
+.flip .f,.flip .k{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:22px;display:flex;flex-direction:column;justify-content:center}
+.flip .f{background:var(--navy);color:#fff}
+.flip .f h3{font-size:24px}.flip .f span{color:#BFD6DA;margin-top:12px;font-size:14px}
+.flip .k{background:var(--surf);border:2px solid var(--grn);transform:rotateY(180deg);font-size:15.5px;overflow:auto}
+.flip:hover .f{background:var(--grn)}
+footer{padding:40px 24px calc(40px + env(safe-area-inset-bottom,0px));color:var(--mut);font-size:14px}
+#tip{position:fixed;z-index:50;max-width:290px;background:var(--ink);color:var(--bg);padding:10px 13px;border-radius:8px;font-size:14px;pointer-events:none;opacity:0;transition:opacity .15s;box-shadow:0 8px 24px #0005}
+#modal{position:fixed;inset:0;z-index:60;background:#000a;display:none;place-items:center;padding:20px}
+#modal.show{display:grid}
+#modal .box{background:var(--surf);max-width:520px;width:100%;border-radius:14px;padding:26px;border-top:8px solid var(--amb);animation:pop .25s}
+#modal h3{font-size:22px;margin-bottom:10px}
+#modal button{margin-top:16px;padding:9px 20px;border:0;border-radius:8px;background:var(--navy);color:#fff;font:600 15px inherit;font-family:inherit;cursor:pointer}
+@keyframes pop{from{transform:scale(.9);opacity:0}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+:focus-visible{outline:3px solid var(--amb);outline-offset:2px}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<div class="semaforo" data-tip="El semáforo es la herramienta de control de la conciliación mensual SIRE vs. libros."><i></i><i></i><i></i></div>
+<h1>EVANZU S.A.C.: evaluamos los resultados de la solución</h1>
+<p>Guía de Práctica Semana 14 · Unidad Didáctica: Solución de Problemas. Periodo de análisis: julio–diciembre 2026.</p>
+<div class="team"><span>Cachura Quiñones, Brandon</span><span>Huaroc Ponce, Edwin</span><span>Taipe Fernández, Nelson</span><span>Puñez Arana, Andrés</span><span>Valer Rosales, Maryori</span><span>Curipaco Orellana, Alexander</span></div>
+</div></header>
+<nav><div class="wrap" id="nav"><a href="#problemas">Árbol de problemas</a><a href="#objetivos">Árbol de objetivos</a><a href="#alternativas">Alternativas</a><a href="#matriz">Matriz de selección</a><a href="#plan">Plan de acción</a><a href="#viab">Viabilidad</a><a href="#sintesis">Síntesis conclusiva</a></div></nav>
+
+<section id="problemas"><div class="wrap">
+<h2>Árbol de problemas</h2>
+<p class="lead">El problema central y sus tres causas raíz, tal como se describen en la guía. Pasa el mouse por cada recuadro o haz clic para ver el detalle.</p>
+<div class="note">El documento resume el árbol en palabras y no lo dibuja completo. Aquí solo aparece lo que la guía menciona de forma explícita.</div>
+<div class="tree p">
+<div class="row"><div class="node eff" tabindex="0" data-tip="Manifestación citada en el problema central." data-pop="Registro tardío|La guía lo incluye en la redacción del problema central: «registro tardío y notificaciones de SUNAT».">
+<small>Efecto</small>Registro tardío de operaciones contables</div>
+<div class="node eff" tabindex="0" data-tip="Manifestación citada en el problema central." data-pop="Notificaciones de SUNAT|La guía lo incluye en el problema central. La meta del plan es llegar a 0 multas o intereses moratorios, lo que indica que ese es el riesgo a evitar.">
+<small>Efecto</small>Notificaciones de SUNAT</div></div>
+<div class="arrow">▲</div>
+<div class="row"><div class="node core" tabindex="0" data-pop="Problema central|Conciliación y cálculo del IGV imprecisos en EVANZU S.A.C., julio–diciembre 2026, registro tardío y notificaciones de SUNAT." data-tip="Clic para ver el enunciado completo."><small>Problema central</small>Conciliación y cálculo del IGV imprecisos en EVANZU S.A.C., julio–diciembre 2026, registro tardío y notificaciones de SUNAT.</div></div>
+<div class="arrow">▲</div>
+<div class="row">
+<div class="node cau" tabindex="0" data-tip="Corregida por la prevalidación y conciliación con semáforo." data-pop="Causa 1|La guía señala la falta de conciliación entre el SIRE y los libros contables, que produce errores de cálculo del IGV."><small>Causa raíz 1</small>Falta de conciliación entre el SIRE y los libros contables; errores de cálculo del IGV</div>
+<div class="node cau" tabindex="0" data-tip="Corregida por la política de fecha de corte." data-pop="Causa 2|La guía menciona informalidad en la recepción de comprobantes, con canales informales como WhatsApp, y atraso contable."><small>Causa raíz 2</small>Informalidad en la recepción de comprobantes; atraso contable</div>
+<div class="node cau" tabindex="0" data-tip="Corregida por la vigilancia del buzón SOL." data-pop="Causa 3|La guía señala la ausencia de seguimiento al buzón electrónico SOL, que lleva al vencimiento de notificaciones de SUNAT."><small>Causa raíz 3</small>Ausencia de seguimiento al buzón SOL; vencimiento de notificaciones de SUNAT</div>
+</div></div>
+</div></section>
+
+<section id="objetivos"><div class="wrap">
+<h2>Árbol de objetivos</h2>
+<p class="lead">Cada causa se convierte en un medio y el problema en el objetivo central. Es la relación de medios a fines que describe la guía.</p>
+<div class="note">El documento enuncia el objetivo central y los tres ejes de acción. Los fines se toman de su redacción.</div>
+<div class="tree o">
+<div class="row"><div class="node eff" tabindex="0" data-tip="Resultado esperado de la actividad 2." data-pop="Registro oportuno|Resultado esperado: eliminar el registro tardío mediante un flujo ordenado, canal único de recepción y control semanal de rezagos."><small>Fin</small>Registro oportuno de operaciones</div>
+<div class="node eff" tabindex="0" data-tip="Resultado esperado de las actividades 3 y 4." data-pop="Notificaciones atendidas|Resultado esperado: detectar el 100% de las notificaciones el mismo día de su emisión y atenderlas dentro del plazo."><small>Fin</small>Notificaciones de SUNAT atendidas</div>
+<div class="node eff" tabindex="0" data-tip="Meta: 0 multas o intereses moratorios." data-pop="Sin multas|La meta del plan es 0 multas o intereses moratorios en el semestre julio–diciembre 2026."><small>Fin</small>Evitar multas o sanciones</div></div>
+<div class="arrow">▲</div>
+<div class="row"><div class="node core" tabindex="0" data-tip="Clic para ver el enunciado completo." data-pop="Objetivo central|Conciliación y cálculo del IGV precisos en EVANZU S.A.C., julio–diciembre 2026, registro oportuno y notificaciones atendidas."><small>Objetivo central</small>Conciliación y cálculo del IGV precisos en EVANZU S.A.C., julio–diciembre 2026, registro oportuno y notificaciones atendidas.</div></div>
+<div class="arrow">▲</div>
+<div class="row">
+<div class="node cau" tabindex="0" data-tip="Eje de acción 1."><small>Medio 1</small>Prevalidación continua y conciliación mensual (SIRE vs. libros) con semáforo</div>
+<div class="node cau" tabindex="0" data-tip="Eje de acción 2."><small>Medio 2</small>Registro semanal por lotes con política de corte y tablero de pendientes</div>
+<div class="node cau" tabindex="0" data-tip="Eje de acción 3."><small>Medio 3</small>Matriz de riesgo de notificaciones SUNAT con vigilancia periódica del buzón SOL y respuestas modelo</div>
+</div></div>
+</div></section>
+
+<section id="alternativas"><div class="wrap">
+<h2>Formulación de las alternativas planteadas</h2>
+<p class="lead">La guía detalla la alternativa seleccionada. Haz clic en cada eje para ver qué actividad lo desarrolla.</p>
+<div class="note">El documento no describe la otra alternativa evaluada. Solo se conoce su puntaje en la matriz (3.95).</div>
+<div class="card alt">
+<h3>Alternativa 2 — «Cierre Blindado: Crédito fiscal validado, respuestas listas y cero rezagos»</h3>
+<p>Seleccionada por su máximo impacto fiscal y alta viabilidad operativa. Se organiza en tres ejes de acción:</p>
+<button class="eje" data-pop="Eje 1|Actividad 1 del plan: prevalidación continua de comprobantes de compra y conciliación mensual SIRE vs. libros con semáforo. Meta: 6 de 6 cierres conciliados antes del vencimiento.">1) Prevalidación continua y conciliación mensual (SIRE vs. libros) con semáforo</button>
+<button class="eje" data-pop="Eje 2|Actividad 2 del plan: política de entrega con fecha de corte y registro semanal por lotes con tablero de pendientes. Meta: 95% a 100% registrado en la semana.">2) Registro semanal por lotes con política de corte y tablero de pendientes</button>
+<button class="eje" data-pop="Eje 3|Actividades 3 y 4 del plan: revisión del buzón SOL con responsable asignado y matriz de riesgo con plazos internos, escalamiento y respuestas modelo.">3) Matriz de riesgo de notificaciones SUNAT con vigilancia periódica del buzón SOL y respuestas modelo</button>
+</div></div></section>
+
+<section id="matriz"><div class="wrap">
+<h2>Matriz de selección de alternativas</h2>
+<p class="lead">Puntaje ponderado de la Matriz de Evaluación. Haz clic en una barra para ver el detalle.</p>
+<div class="bars card" id="bars">
+<div class="b"><div class="lab"><span>Alternativa 2 · Cierre Blindado (seleccionada)</span><span>4.25</span></div><div class="track"><div class="fill" data-w="85" style="background:var(--grn)" data-pop="Alternativa seleccionada|Obtuvo 4.25 de puntaje ponderado, destacando por su máximo impacto fiscal y alta viabilidad operativa." data-tip="4.25 sobre 5">4.25</div></div></div>
+<div class="b"><div class="lab"><span>Otra alternativa evaluada</span><span>3.95</span></div><div class="track"><div class="fill" data-w="79" style="background:var(--amb)" data-pop="Otra alternativa|Obtuvo 3.95. La guía no describe esta alternativa ni sus puntajes por criterio." data-tip="3.95 sobre 5">3.95</div></div></div>
+</div>
+<div class="crit">
+<div class="card" data-tip="Dato citado en la actividad 3, pregunta 4."><b>4 / 5</b><br>Costo y recurso de «Cierre Blindado»: aprovecha hojas de cálculo, carpetas compartidas y acceso a SOL/SIRE.</div>
+<div class="card" data-tip="Razón de selección indicada en el contexto."><b>Máximo</b><br>Impacto fiscal, el factor que destaca la guía.</div>
+<div class="card" data-tip="Razón de selección indicada en el contexto."><b>Alta</b><br>Viabilidad operativa de la alternativa.</div>
+</div></div></section>
+
+<section id="plan"><div class="wrap">
+<h2>Evaluación de resultados (plan de acción)</h2>
+<p class="lead">Matriz de resultados esperados de la Alternativa 2. Abre cada actividad.</p>
+<div id="accs"></div>
+<div class="calc" data-tip="Fórmula de la guía: (Resultado alcanzado / Meta programada) × 100.">
+<b>Calculadora de cumplimiento</b>
+<p style="margin:6px 0 10px">Porcentaje de cumplimiento = (Resultado alcanzado / Meta programada) × 100</p>
+<label>Alcanzado <input id="ra" type="number" min="0" value="6"></label> &nbsp; <label>Meta <input id="mp" type="number" min="1" value="6"></label>
+<div class="res" id="pc">100%</div>
+<small>Ejemplo con la meta de la actividad 1: 6 de 6 meses conciliados.</small>
+</div></div></section>
+
+<section id="viab"><div class="wrap">
+<h2>Viabilidad de la solución</h2>
+<p class="lead">Respuestas del equipo a las siete preguntas de viabilidad.</p>
+<div id="via"></div>
+<h3 style="margin:32px 0 12px">Lista de cotejo (autoevaluación)</h3>
+<p class="lead" style="margin-bottom:12px">En la guía el equipo marcó «Sí» en los ocho criterios. Haz clic para desmarcar y ver cómo cambia el total.</p>
+<ul class="chk" id="chk"></ul>
+<div class="score" id="sc"></div>
+</div></section>
+
+<section id="sintesis"><div class="wrap">
+<h2>Síntesis conclusiva</h2>
+<p class="lead">Haz clic en cada tarjeta para leer la conclusión.</p>
+<div class="concl">
+<button class="flip"><div class="in"><div class="f"><h3>Pertinencia de las actividades</h3><span>Clic para voltear</span></div><div class="k">Las actividades de la Alternativa 2 son coherentes con el diagnóstico de EVANZU S.A.C. Abordan de raíz la falta de conciliación entre el SIRE y los libros contables, la informalidad en la recepción de comprobantes y la ausencia de seguimiento al buzón SOL, y aseguran información contable y tributaria confiable.</div></div></button>
+<button class="flip"><div class="in"><div class="f"><h3>Cumplimiento esperado de los objetivos</h3><span>Clic para voltear</span></div><div class="k">Los indicadores cuantitativos, las metas semestrales precisas y los medios de verificación auditables (tableros de pendientes, matrices de riesgo y listas de cotejo firmadas) dan un control efectivo sobre los resultados. Permiten calcular el IGV con precisión, registrar a tiempo y evitar multas de SUNAT entre julio y diciembre de 2026.</div></div></button>
+<button class="flip"><div class="in"><div class="f"><h3>Viabilidad de la solución</h3><span>Clic para voltear</span></div><div class="k">La solución es altamente viable en lo técnico, operativo y financiero. Maximiza el impacto preventivo ante contingencias tributarias con herramientas de rápida adopción y bajo costo, y suma protocolos de escalamiento y acciones correctivas que sostienen su aplicación en el tiempo.</div></div></button>
+</div></div></section>
+
+<footer><div class="wrap">Fuente: Guía de Práctica Semana 14, caso EVANZU S.A.C. Todo el contenido proviene del documento.</div></footer>
+
+<div id="tip" role="tooltip"></div>
+<div id="modal"><div class="box"><h3 id="mt"></h3><p id="mb"></p><button id="mc">Cerrar</button></div></div>
+
+<script>
+var plan=[
+["Prevalidación continua de comprobantes de compra y conciliación mensual (SIRE vs. libros contables) con semáforo.","Contar con el 100% de comprobantes validados (RUC activo/habido, bancarización, detracción) y conciliados antes de declarar el IGV.","Porcentaje de meses con conciliación SIRE vs. libros cerrada sin diferencias y con checklist firmado.","100% de los cierres mensuales (6 de 6 meses: julio–diciembre 2026) conciliados antes del vencimiento.","Archivo Excel/Power Query de conciliación con semáforo y lista de verificación firmada por el contador."],
+["Aprobación de política de entrega de comprobantes con fecha de corte y registro semanal por lotes con tablero de pendientes.","Eliminar el registro tardío de operaciones contables mediante un flujo ordenado, canal único de recepción y control semanal de rezagos.","Porcentaje de comprobantes registrados dentro de la semana de recepción según fecha de corte.","95% a 100% de comprobantes registrados oportunamente cada semana durante el semestre.","Política interna aprobada, tablero digital de pendientes con antigüedad y actas de reunión semanal (15 min)."],
+["Revisión periódica del buzón electrónico SOL con responsable asignado y registro en tablero de notificaciones.","Detectar el 100% de esquelas, cartas inductivas o notificaciones de SUNAT el mismo día de su emisión, evitando vencimientos.","Porcentaje de días hábiles con revisión ejecutada y registrada en el tablero de vigilancia SOL.","100% de revisiones diarias/semanales cumplidas según cronograma durante julio–diciembre 2026.","Bitácora/tablero compartido de notificaciones SOL con alertas de vencimiento y resumen semanal al jefe contable."],
+["Implementación de matriz de riesgo de notificaciones SUNAT con plazos internos, escalamiento y respuestas modelo.","Atender y subsanar oportunamente toda inconsistencia tributaria con expedientes sustentados, reduciendo multas a cero.","Porcentaje de notificaciones atendidas dentro del plazo interno establecido y número de multas generadas.","100% de notificaciones atendidas antes del plazo SUNAT y 0 multas o intereses moratorios.","Matriz de riesgo aprobada, cargos de presentación de descargos en SUNAT y expedientes de sustento archivados."]];
+var lab=["Resultado esperado","Indicador","Meta","Medio de verificación"];
+var via=[
+["¿Las actividades propuestas contribuyen a solucionar el problema?","Sí. Cada actividad ataca de forma directa las tres causas raíz: la prevalidación y conciliación con semáforo corrigen los errores de cálculo del IGV; la política de fecha de corte con registro semanal elimina el atraso contable y el uso de canales informales; y la vigilancia del buzón SOL junto con la matriz de riesgo evitan el vencimiento de notificaciones de SUNAT."],
+["¿Los indicadores permiten medir los resultados?","Sí. Son indicadores cuantitativos (porcentaje de conciliación mensual, de comprobantes registrados en plazo, de revisiones del buzón SOL y tasa de atención oportuna de notificaciones), complementados con criterios cualitativos de calidad documental. Permiten calcular el avance mes a mes."],
+["¿Las metas son alcanzables?","Sí. Las metas (100% de cierres conciliados, 95%–100% de registro semanal oportuno y 0 multas en el semestre) son realistas y exigentes. Se apoyan en plantillas Excel/Power Query, tableros compartidos y checklists, sin desarrollos informáticos complejos."],
+["¿Se cuenta con los recursos necesarios?","Sí. «Cierre Blindado» obtuvo 4/5 en costo y recurso porque aprovecha la infraestructura existente (hojas de cálculo automatizadas, carpetas compartidas, acceso a SOL/SIRE) y reorganiza la carga del equipo contable con roles definidos y reuniones semanales de 15 minutos."],
+["¿Los plazos establecidos son suficientes?","Sí. El horizonte abarca julio–diciembre 2026, con ciclos de control semanales y cierres mensuales previos al cronograma de SUNAT. Hay margen para subsanar observaciones antes de presentar las declaraciones juradas."],
+["¿Qué dificultades podrían presentarse?","(a) Resistencia inicial de áreas internas o proveedores a respetar las fechas de corte y abandonar canales informales como WhatsApp. (b) Intermitencias o actualizaciones técnicas del SIRE en días de vencimiento. (c) Sobrecarga puntual del personal contable en semanas de cierre tributario."],
+["¿Qué acciones correctivas propondrías?","(a) Gerencia comunica que todo comprobante entregado fuera de la fecha de corte pasa al periodo siguiente, salvo autorización expresa. (b) Prevalidación y descarga del RVIE/RCE semanal por lotes, para no concentrar la carga al cierre. (c) Rotación con titular y suplente para la revisión diaria del buzón SOL y capacitación continua en normativa SIRE."]];
+var crit=["Identifica los resultados esperados del plan de acción.","Relaciona las actividades con el objetivo central.","Formula indicadores pertinentes y medibles.","Establece metas claras y alcanzables.","Identifica los medios de verificación correspondientes.","Analiza la viabilidad de la solución propuesta.","Identifica posibles dificultades durante la implementación.","Formula conclusiones y acciones de mejora."];
+function mk(id,items,tf){var h="";items.forEach(function(it,i){h+='<div class="acc"><button aria-expanded="false"><span class="n">'+(i+1)+'</span><span>'+it[0]+'</span><span class="chev">▾</span></button><div class="body">'+tf(it)+'</div></div>'});document.getElementById(id).innerHTML=h}
+mk("accs",plan,function(it){var s="";for(var k=1;k<5;k++)s+='<p class="kv"><b>'+lab[k-1]+'</b>'+it[k]+'</p>';return s});
+mk("via",via,function(it){return '<p>'+it[1]+'</p>'});
+document.querySelectorAll(".acc>button").forEach(function(b){b.onclick=function(){var a=b.parentNode;a.classList.toggle("open");b.setAttribute("aria-expanded",a.classList.contains("open"))}});
+var ul=document.getElementById("chk");
+function score(){var n=ul.querySelectorAll("li:not(.off)").length;document.getElementById("sc").textContent="Total: "+n+" / 8"+(n==8?" · todos los criterios cumplidos":"")}
+crit.forEach(function(c,i){var li=document.createElement("li");li.tabIndex=0;li.innerHTML='<span class="box">✓</span><span>'+(i+1)+'. '+c+'</span>';li.onclick=function(){li.classList.toggle("off");score()};li.onkeydown=function(e){if(e.key=="Enter"||e.key==" "){e.preventDefault();li.click()}};ul.appendChild(li)});score();
+function calc(){var a=+document.getElementById("ra").value,m=+document.getElementById("mp").value;document.getElementById("pc").textContent=m>0?(Math.round(a/m*1000)/10)+"%":"—"}
+document.getElementById("ra").oninput=document.getElementById("mp").oninput=calc;
+document.querySelectorAll(".flip").forEach(function(f){f.onclick=function(){f.classList.toggle("on")}});
+var tip=document.getElementById("tip");
+document.addEventListener("mousemove",function(e){var t=e.target.closest("[data-tip]");if(!t){tip.style.opacity=0;return}tip.textContent=t.getAttribute("data-tip");tip.style.opacity=1;var x=Math.min(e.clientX+14,innerWidth-310);tip.style.left=Math.max(8,x)+"px";tip.style.top=(e.clientY+18)+"px"});
+var md=document.getElementById("modal");
+function pop(t){var p=t.getAttribute("data-pop").split("|");document.getElementById("mt").textContent=p[0];document.getElementById("mb").textContent=p[1];md.classList.add("show");document.getElementById("mc").focus()}
+document.addEventListener("click",function(e){var t=e.target.closest("[data-pop]");if(t)pop(t);else if(e.target===md)md.classList.remove("show")});
+document.addEventListener("keydown",function(e){if(e.key=="Escape")md.classList.remove("show");if(e.key=="Enter"&&e.target.hasAttribute&&e.target.hasAttribute("data-pop"))pop(e.target)});
+document.getElementById("mc").onclick=function(){md.classList.remove("show")};
+var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.querySelectorAll(".fill").forEach(function(f){f.style.width=f.getAttribute("data-w")+"%"})}})},{threshold:.4});io.observe(document.getElementById("bars"));
+var links=document.querySelectorAll("#nav a"),secs=[].map.call(links,function(a){return document.querySelector(a.getAttribute("href"))});
+var so=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){links.forEach(function(l){l.classList.toggle("on",l.getAttribute("href")=="#"+en.target.id)})}})},{rootMargin:"-30% 0px -60% 0px"});secs.forEach(function(s){so.observe(s)});
+</script>
+</body>
+</html>
